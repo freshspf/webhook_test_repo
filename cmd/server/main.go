@@ -19,6 +19,9 @@ func main() {
 	r.HandleFunc("/tetris", handlers.TetrisHandler).Methods("GET")
 	r.HandleFunc("/", handlers.TetrisHandler).Methods("GET") // 默认页面也是俄罗斯方块
 	
+	// 五子棋游戏路由
+	r.HandleFunc("/gomoku", handlers.GomokuHandler).Methods("GET")
+	
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -26,5 +29,6 @@ func main() {
 	
 	log.Printf("Server starting on port %s", port)
 	log.Printf("Tetris game available at: http://localhost:%s/tetris", port)
+	log.Printf("Gomoku game available at: http://localhost:%s/gomoku", port)
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }
